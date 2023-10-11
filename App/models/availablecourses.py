@@ -1,3 +1,4 @@
+from flask_sqlalchemy import SQLAlchemy
 from App.database import db
 
 class AvailableCourses(db.Model):
@@ -7,5 +8,5 @@ class AvailableCourses(db.Model):
 
     def toJSON(self):
         return{
-
+            'course' : self.course.toJSON()
         }

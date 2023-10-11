@@ -10,12 +10,18 @@ class Staff(User):
         self.email = email
         self.name = name
         self.set_password(password)
-        self.user_type = "staff"
+        self.userType = "staff"
 
     def toJSON(self):
         return{
             'id': self.id,
             'email': self.email,
             'name': self.name,
-            'type': 'staff'
+            'userType': 'staff'
         }
+    
+    def listAvailableCourse(self, course):
+    
+    def removeUnavailableCourse(self, course):
+
+    def updateProgrammeRequirements(self, programme):

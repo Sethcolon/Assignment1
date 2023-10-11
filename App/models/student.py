@@ -11,12 +11,20 @@ class Student(User):
         self.email = email
         self.name = name
         self.set_password(password)
-        self.user_type = "student"
+        self.userType = "student"
 
     def toJSON(self):
         return{
             'id': self.id,
             'email': self.email,
             'name': self.name,
-            'type': 'student'
+            'userType': 'student'
         }
+
+    def selectPastCourse():
+
+    def removePastCourse():
+
+    def selectPlannedCourse():
+
+    def removePlannedCourse():

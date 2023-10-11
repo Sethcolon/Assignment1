@@ -1,21 +1,25 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
 from App.database import db
 
 class User(db.Model, UserMixin):
+    
+    __abstract__ = True
     id = db.Column(db.Integer, primary_key=True)
     email =  db.Column(db.String, nullable=False, unique=True)
     name =  db.Column(db.String, nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    user_type =  db.Column(db.String(120), nullable=False)
+    userType =  db.Column(db.String(120), nullable=False)
 
-    def __init__(self, email, name, password):
+    def __init__(self, email, name, password, userType):
         self.email = email
         self.name = name
         self.set_password(password)
+        self.userType = userType
 
     def __repr__(self):
-        return f'<User {self.id} {self.email} {self.name}>'
+        return f'<User {self.id} {self.email} {self.name} {self.userType}>'
 
     def set_password(self, password):
         """Create hashed password."""
@@ -30,6 +34,6 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'email': self.email,
             'name': self.name,
-            'user_type': self.user_type
+            'userType': self.userType
         }
 
