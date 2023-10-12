@@ -1,4 +1,5 @@
-from .user import User
+from .User import User
+from .CourseHistory import CourseHistory
 from flask_login import UserMixin
 from App.database import db
 
@@ -12,6 +13,44 @@ class Student(User):
         self.set_password(password)
         self.userType = "student"
 
+    def selectPastCourse(self, course):
+        newCourseHistory = CourseHistory(self.id, course.courseID)
+        try:
+            db.session.add(newCourseHistory)
+            db.session.commit()
+            return True
+        except:
+            db.session.rollback()
+            return False
+    
+    def deletePastCourse(self, courseHistory):
+        try:
+            db.session.delete(courseHistory)
+            db.session.commit()
+            return True
+        except:
+            db.session.rollback()
+            return False
+
+    def selectPlannedCourse(self, course):
+        newCoursePlan = CoursePlan(self.id, course.courseID)
+        try:
+            db.session.add(newCoursePlan)
+            db.session.commit()
+            return True
+        except:
+            db.session.rollback()
+            return False
+    
+    def deletePlannedCourse(self, coursePlan):
+        try:
+            db.session.delete(coursePlan)
+            db.session.commit()
+            return True
+        except:
+            db.session.rollback()
+            return False
+
     def toJSON(self):
         return{
             'id': self.id,
@@ -20,10 +59,9 @@ class Student(User):
             'userType': 'student'
         }
 
-    def selectPastCourse():
+    
 
-    def removePastCourse():
-
+    
     def selectPlannedCourse():
 
     def removePlannedCourse():

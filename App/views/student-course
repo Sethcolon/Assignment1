@@ -3,8 +3,15 @@ from flask_jwt_extended import jwt_required, current_user as jwt_current_user
 from flask_login import login_required, login_user, current_user, logout_user
 
 from App.controllers import{
-
+    get_available_courses_json
 }
 
-student-course_views = Blueprint('student-course_views', __name__, template_folder='../templates')
+studentcourse_views = Blueprint('student-course_views', __name__, template_folder='../templates')
+
+@studentcourse_views.route('/offeredcourses', methods=['GET'])
+@jwt_required()
+def get_available_courses_action():
+    courses = get_available_courses_json()
+    return jsonify(courses)
+
 
