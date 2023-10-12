@@ -12,13 +12,6 @@ class Staff(User):
         self.set_password(password)
         self.userType = "staff"
 
-    def toJSON(self):
-        return{
-            'id': self.id,
-            'email': self.email,
-            'name': self.name,
-            'userType': 'staff'
-        }
     
     def makeCourseAvailable(self, course):
         if course.status == 'Available':
@@ -44,4 +37,12 @@ class Staff(User):
             db.session.rollback()
             return False
 
-    def updateProgrammeRequirements(self, programme):
+    #def updateProgrammeRequirements(self, programme):
+
+        def toJSON(self):
+        return{
+            'id': self.id,
+            'email': self.email,
+            'name': self.name,
+            'userType': 'staff'
+        }

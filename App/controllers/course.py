@@ -18,14 +18,18 @@ def get_available_courses():
 
 def get_all_courses_json():
     courses = Course.query.all()
-    return [course.toJSON() for course in courses]
+    if courses:
+        return [course.toJSON() for course in courses]
+    return []
 
 def get_available_courses_json():
     courses = Course.query.filter_by(status='Available').all()
-    return [course.toJSON() for course in courses]
+    if courses:
+        return [course.toJSON() for course in courses]
+    return []
 
 def make_course_available(staff, course)
-        return staff.makeCourseAvailable(course)
+    return staff.makeCourseAvailable(course)
 
 def make_course_unavailable(staff, course)
-        return staff.makeCourseUnavailable(course)
+    return staff.makeCourseUnavailable(course)

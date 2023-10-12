@@ -7,11 +7,3 @@ from App.controllers import{
 }
 
 studentcourse_views = Blueprint('student-course_views', __name__, template_folder='../templates')
-
-@studentcourse_views.route('/offeredcourses', methods=['GET'])
-@jwt_required()
-def get_available_courses_action():
-    courses = get_available_courses_json()
-    return jsonify(courses)
-
-
