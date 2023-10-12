@@ -1,7 +1,7 @@
 from flask_login import login_user, login_manager, logout_user, LoginManager
 from flask_jwt_extended import create_access_token, jwt_required, JWTManager
 
-from App.models import User
+from App.models import User, Staff, Student
 
 def jwt_authenticate(email, password):
     staff = Staff.query.filter_by(email=email).first()

@@ -25,7 +25,7 @@ def create_student(email, name=name, password):
 def get_staff(id):
     return Staff.query.get(id)
 
-def get_Student(id):
+def get_student(id):
     return Student.query.get(id)
 
 def is_staff(id):

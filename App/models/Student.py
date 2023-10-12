@@ -2,26 +2,28 @@ from .user import User
 from flask_login import UserMixin
 from App.database import db
 
-class Staff(User):
+class Student(User):
 
-    __tablename__ = 'staff'
+    __tablename__ = 'student'
 
     def __init__(self, email, name, password):
         self.email = email
         self.name = name
         self.set_password(password)
-        self.userType = "staff"
+        self.userType = "student"
 
     def toJSON(self):
         return{
             'id': self.id,
             'email': self.email,
             'name': self.name,
-            'userType': 'staff'
+            'userType': 'student'
         }
-    
-    def listAvailableCourse(self, course):
-    
-    def removeUnavailableCourse(self, course):
 
-    def updateProgrammeRequirements(self, programme):
+    def selectPastCourse():
+
+    def removePastCourse():
+
+    def selectPlannedCourse():
+
+    def removePlannedCourse():

@@ -4,7 +4,10 @@ from flask.cli import with_appcontext, AppGroup
 
 from App.database import db, get_migrate
 from App.main import create_app
-from App.controllers import ( create_user, get_all_users_json, get_all_users )
+from App.controllers import (
+    create_user, get_all_users_json, get_all_users, 
+    create_course, get_course, get_all_courses,
+    create_programme, get_programme, get_all_programmes )
 
 # This commands file allow you to create convenient CLI commands for testing controllers
 
@@ -18,6 +21,14 @@ def initialize():
     db.create_all()
     create_user('bob@uwimail.com', 'bob', 'bobpass', 'staff')
     create_user('jane@uwimail.com', 'jane', 'janepass', 'student')
+    create_programme('CS_Spec', 'BSc Computer Science (Special)' 'FST' 24, 60, 9, 93)
+    create_programme('CS_Mgmt', 'BSc Computer Science (Management)' 'FST' 24, 60, 9, 93)
+    create_programme('CS_Major', 'Major in Computer Science' 'FST' 24, 60, 9, 93)
+    create_course(COMP1600, 'Introduction to Computing Concepts', 'Level One', 3, 1)
+    create_course(COMP1601, 'Computer Programming I', 'Level One', 3, 1)
+    create_course(INFO1600, 'Introduction to Information Technology Concepts', 'Level One', 3, 1)
+    create_course(MATH1115, 'Fundamental Mathematics for General Sciences I', 'Level One', 3, 1)
+    create_course(FOUN1101, 'Caribbean Civilisation', 'Foundation', 3, 1)
     print('database intialized')
 
 '''
