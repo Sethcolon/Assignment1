@@ -1,5 +1,5 @@
-from .User import User
-from .CourseHistory import CourseHistory
+from .user import User
+from .coursehistory import CourseHistory
 from flask_login import UserMixin
 from App.database import db
 
@@ -58,10 +58,3 @@ class Student(User):
             'name': self.name,
             'userType': 'student'
         }
-
-    
-
-    
-    def selectPlannedCourse():
-
-    def removePlannedCourse():

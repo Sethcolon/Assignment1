@@ -12,11 +12,10 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(120), nullable=False)
     userType =  db.Column(db.String(120), nullable=False)
 
-    def __init__(self, email, name, password, userType):
+    def __init__(self, email, name, password):
         self.email = email
         self.name = name
         self.set_password(password)
-        self.userType = userType
 
     def __repr__(self):
         return f'<User {self.id} {self.email} {self.name} {self.userType}>'

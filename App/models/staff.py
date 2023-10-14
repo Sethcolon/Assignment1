@@ -1,4 +1,4 @@
-from .User import User
+from .user import User
 from flask_login import UserMixin
 from App.database import db
 
@@ -39,7 +39,7 @@ class Staff(User):
 
     #def updateProgrammeRequirements(self, programme):
 
-        def toJSON(self):
+    def toJSON(self):
         return{
             'id': self.id,
             'email': self.email,

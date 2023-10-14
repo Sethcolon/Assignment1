@@ -10,7 +10,7 @@ class Programme(db.Model):
     advancedLevelCredits =  db.Column(db.Integer, nullable=False)
     foundationCredits =  db.Column(db.Integer, nullable=False)
     totalCredits =  db.Column(db.Integer, nullable=False)
-    courses = db.relationship('CourseProgramme', backref=db.backref('programmeID', lazy='joined'))
+    courses = db.relationship('CourseProgramme', backref=db.backref('programme', lazy='joined'))
 
     def __init__(self, programmeID, programmeName, faculty, levelOneCredits, advancedLevelCredits, foundationCredits, totalCredits):
         self.programmeID = programmeID

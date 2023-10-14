@@ -1,5 +1,5 @@
-from App.models import User, Student, Staff, Course, Programme, CourseHistory, CoursePlan
 from App.database import db
+from App.models import User, Student, Staff, Course, Programme, CourseHistory, CoursePlan
 
 def create_CourseHistory(student, course):
 #def create_CourseHistory(studentID, courseID):

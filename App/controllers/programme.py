@@ -1,5 +1,5 @@
-from App.models import User, Course, Programme
 from App.database import db
+from App.models import User, Course, Programme
 
 def create_programme(programmeID, programmeName, faculty, levelOneCredits, advancedLevelCredits, foundationCredits, totalCredits):
     newProgramme = Programme(programmeID=programmeID, programmeName=programmeName, faculty=faculty, levelOneCredits=levelOneCredits, advancedLevelCredits=advancedLevelCredits, foundationCredits=foundationCredits, totalCredits=totalCredits)

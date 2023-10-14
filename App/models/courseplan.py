@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from App.database import db
 
-class coursePlan(db.Model):
+class CoursePlan(db.Model):
 
     coursePlanID = db.Column(db.Integer, primary_key=True)
     studentID = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)

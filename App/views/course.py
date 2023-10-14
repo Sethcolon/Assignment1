@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, jsonify, request, send_from_direct
 from flask_jwt_extended import jwt_required, current_user as jwt_current_user
 from flask_login import login_required, login_user, current_user, logout_user
 
-from App.controllers import{
+from App.controllers import (
     get_all_courses_json,
     get_available_courses_json,
     get_staff,
@@ -17,8 +17,8 @@ from App.controllers import{
     create_CoursePlan,
     remove_CoursePlan,
     get_courseplan,
-    get_courseplan_by_student_json,
-}
+    get_courseplan_by_student_json
+)
 
 course_views = Blueprint('course_views', __name__, template_folder='../templates')
 
@@ -40,7 +40,7 @@ def get_available_courses_action():
 
 
 @course_views.route('/courses/<courseID>', methods=['PUT'])
-jwt_required()
+@jwt_required()
 def toggle_course_availablity_action(courseID):
     staff = get_staff(current_user.id)
     course = get_course(courseID)
@@ -57,7 +57,7 @@ def toggle_course_availablity_action(courseID):
 
 
 @course_views.route('/coursehistory', methods=['GET'])
-jwt_required()
+@jwt_required()
 def get_course_history():
     student = get_student(current_user.id)
     if student:
@@ -66,7 +66,7 @@ def get_course_history():
 
 
 @course_views.route('/coursehistory', methods=['POST'])
-jwt_required()
+@jwt_required()
 def add_course_to_history():
     student = get_student(current_user.id)
     course = get_course(request.json['courseID'])
@@ -79,7 +79,7 @@ def add_course_to_history():
 
 
 @course_views.route('/coursehistory/<int:id>', methods=['DELETE'])
-jwt_required()
+@jwt_required()
 def remove_course_from_history(id):
     student = get_student(current_user.id)
     courseHistoryToRemove = get_coursehistory(id)
@@ -91,7 +91,7 @@ def remove_course_from_history(id):
 
 
 @course_views.route('/courseplan', methods=['GET'])
-jwt_required()
+@jwt_required()
 def get_course_plan():
     student = get_student(current_user.id)
     if student:
@@ -100,7 +100,7 @@ def get_course_plan():
 
 
 @course_views.route('/courseplan', methods=['POST'])
-jwt_required()
+@jwt_required()
 def add_course_to_plan():
     student = get_student(current_user.id)
     course = get_course(request.json['courseID'])
@@ -113,7 +113,7 @@ def add_course_to_plan():
 
 
 @course_views.route('/courseplan/<int:id>', methods=['DELETE'])
-jwt_required()
+@jwt_required()
 def remove_course_from_plan(id):
     student = get_student(current_user.id)
     coursePlanToRemove = get_courseplan(id)
