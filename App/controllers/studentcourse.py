@@ -19,7 +19,7 @@ def get_coursehistory_by_student(studentID):
 def get_coursehistory_by_student_json(studentID): 
     coursehistory = CourseHistory.query.filter_by(studentID=studentID).all()
     if coursehistory:
-        return [coursehistory.toJSON() for ch in coursehistory]
+        return [ch.toJSON() for ch in coursehistory]
     return []
 
 def get_all_coursehistory():
@@ -28,7 +28,7 @@ def get_all_coursehistory():
 def get_all_coursehistory_json():
     coursehistory = CourseHistory.query.all()
     if coursehistory:
-        return [coursehistory.toJSON() for ch in coursehistory]
+        return [ch.toJSON() for ch in coursehistory]
     return []
 
 ''' CONTROLLERS FOR COURSE PLAN'''
@@ -46,16 +46,16 @@ def get_courseplan_by_student(studentID):
     return CoursePlan.query.filter_by(studentID=studentID).all()
 
 def get_courseplan_by_student_json(studentID):
-    courseplan = CoursePlan.query.filter_by(studentID=studentID).all()
-    if courseplan:
-        return [courseplan.toJSON() for cp in courseplan]
+    courseplans = CoursePlan.query.filter_by(studentID=studentID).all()
+    if courseplans:
+        return [courseplan.toJSON() for courseplan in courseplans]
     return []
 
 def get_all_courseplans():
     return CoursePlan.query.all()
 
 def get_all_courseplans_json():
-    courseplan = CoursePlan.query.all()
-    if courseplan:
-        return [courseplan.toJSON() for cp in courseplan]
+    courseplans = CoursePlan.query.all()
+    if courseplans:
+        return [courseplan.toJSON() for courseplan in courseplans]
     return []

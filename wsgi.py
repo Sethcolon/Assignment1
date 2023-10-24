@@ -22,6 +22,7 @@ def initialize():
     db.create_all()
     create_staff('bob@uwimail.com', 'bob', 'bobpass')
     create_student('jane@uwimail.com', 'jane', 'janepass')
+    create_student('joe@uwimail.com', 'joe', 'joepass')
     
     create_programme('CS_Spec', 'BSc Computer Science (Special)', 'FST', 24, 60, 9, 93, 'Level One: 24 Core Credits | Advanced Level: 60 Credits (45 Core Credits + 15 Elective Credits) | Foundation: 9 Credits')
     create_programme('CS_Major', 'Major in Computer Science', 'FST', 24, 60, 9, 93, 'Level One: 12 CompSci Core Credits | Advanced Level: 30 CompSci Credits (18 Core Credits + 12 Elective Credits) | Foundation: 9 Credits')

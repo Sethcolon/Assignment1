@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from App.database import db
 
 
-class Staff(User):
+class Staff(User, UserMixin):
     __tablename__ = 'staff'
 
     def __init__(self, email, name, password):

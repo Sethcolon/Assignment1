@@ -25,11 +25,12 @@ course_views = Blueprint('course_views', __name__, template_folder='../templates
 @course_views.route('/courses', methods=['GET'])
 @jwt_required()
 def get_all_courses_action():
-    staff = get_staff(current_user.id)
+    staff = get_staff(jwt_current_user.id)
     if staff:
         courses = get_all_courses_json()
         return jsonify(courses)
-    return jsonify({"error": "cannot perform that action"}), 403 
+    return jsonify({"error": "cannot perform that action"}), 403
+     
 
 
 @course_views.route('/availablecourses', methods=['GET'])
@@ -42,13 +43,13 @@ def get_available_courses_action():
 @course_views.route('/courses/<string:courseID>', methods=['PUT'])
 @jwt_required()
 def toggle_course_availablity_action(courseID):
-    staff = get_staff(current_user.id)
+    staff = get_staff(jwt_current_user.id)
     course = get_course(courseID)
     if staff:
         if course:
             if course.status == 'Available':
                 make_course_unavailable(staff, course)
-                return jsonify({"message": f"course {course.courseID} is now unavailable"}), 200
+                return jsonify({"message": f"course {course.courseID} is now unavailable by {staff.id}"}), 200
             else:
                 make_course_available(staff, course)
                 return jsonify({"message": f"course {course.courseID} is now available"}), 200
@@ -59,14 +60,14 @@ def toggle_course_availablity_action(courseID):
 @course_views.route('/coursehistory', methods=['GET'])
 @jwt_required()
 def get_course_history():
-    studentid = current_user.id
+    studentid = jwt_current_user.id
     return get_coursehistory_by_student_json(studentid)
 
 
 @course_views.route('/coursehistory', methods=['POST'])
 @jwt_required()
 def add_course_to_history():
-    student = get_student(current_user.id)
+    student = get_student(jwt_current_user.id)
     data = request.json
     courseID = data['courseID']
     course = get_course(courseID)
@@ -74,34 +75,36 @@ def add_course_to_history():
         coursehistory = create_CourseHistory(student, courseID)
         if coursehistory:
             return jsonify({"message": "course added to student course history"}), 200
-        return jsonify ({"error" : "Unable to add course to history"}), 400
+        return jsonify ({"error" : "unable to add course to student course history"}), 400
     return jsonify ({"error" : "course does not exist"}), 400
 
 
 @course_views.route('/coursehistory/<string:courseID>', methods=['DELETE'])
 @jwt_required()
 def remove_course_from_history(courseID):
-    student = get_student(current_user.id)
+    student = get_student(jwt_current_user.id)
     course = get_course(courseID)
-    courseHistoryToRemove = get_coursehistory(student.id, courseID)
-    if courseHistoryToRemove:
-        if remove_CourseHistory(student, courseHistoryToRemove):
-            return jsonify({"message" : "course removed from student course history"}), 200
-        return jsonify ({"error" : "Unable to remove course from history"}), 400
-    return jsonify ({"error" : "course history does not exist"}), 400
+    if course:
+        courseHistoryToRemove = get_coursehistory(student.id, courseID)
+        if courseHistoryToRemove:
+            if remove_CourseHistory(student, courseHistoryToRemove):
+                return jsonify({"message" : "course removed from student course history"}), 200
+            return jsonify ({"error" : "unable to remove course from student course history"}), 400
+        return jsonify ({"error" : "course does not exist in student course history"}), 400
+    return jsonify ({"error" : "course does not exist"}), 400
 
 
 @course_views.route('/courseplan', methods=['GET'])
 @jwt_required()
 def get_course_plan():
-    studentid = current_user.id
+    studentid = jwt_current_user.id
     return get_courseplan_by_student_json(studentid)
 
 
 @course_views.route('/courseplan', methods=['POST'])
 @jwt_required()
 def add_course_to_plan():
-    student = get_student(current_user.id)
+    student = get_student(jwt_current_user.id)
     data = request.json
     courseID = data['courseID']
     course = get_course(courseID)
@@ -109,18 +112,20 @@ def add_course_to_plan():
         courseplan = create_CoursePlan(student, courseID)
         if courseplan:
             return jsonify({"message": "course added to student course plan"}), 200
-        return jsonify ({"error" : "Unable to add course to plan"}), 400
+        return jsonify ({"error" : "unable to add course to student course plan"}), 400
     return jsonify ({"error" : "course does not exist"}), 400
 
 
 @course_views.route('/courseplan/<string:courseID>', methods=['DELETE'])
 @jwt_required()
 def remove_course_from_plan(id):
-    student = get_student(current_user.id)
+    student = get_student(jwt_current_user.id)
     course = get_course(courseID)
-    coursePlanToRemove = get_courseplan(student.id, courseID)
-    if coursePlanToRemove:
-        if remove_CoursePlan(student, coursePlanToRemove):
-            return jsonify({"message" : "course removed from student course plan"}), 200
-        return jsonify ({"error" : "Unable to remove course from plan"}), 400
-    return jsonify ({"error" : "course plan does not exist"}), 400
+    if course:
+        coursePlanToRemove = get_courseplan(student.id, courseID)
+        if coursePlanToRemove:
+            if remove_CoursePlan(student, coursePlanToRemove):
+                return jsonify({"message" : "course removed from student course plan"}), 200
+            return jsonify ({"error" : "Unable to remove course from student course plan"}), 400
+        return jsonify ({"error" : "course does not exist in student course plan"}), 400
+    return jsonify ({"error" : "course does not exist"}), 400

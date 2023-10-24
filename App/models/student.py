@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from App.database import db
 
-class Student(User):
+class Student(User, UserMixin):
     __tablename__ = 'student'
 
     def __init__(self, email, name, password):
