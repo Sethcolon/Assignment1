@@ -1,10 +1,10 @@
 from .user import User
 from .coursehistory import CourseHistory
 from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
 from App.database import db
 
 class Student(User):
-
     __tablename__ = 'student'
 
     def __init__(self, email, name, password):
@@ -13,8 +13,8 @@ class Student(User):
         self.set_password(password)
         self.userType = "student"
 
-    def selectPastCourse(self, course):
-        newCourseHistory = CourseHistory(self.id, course.courseID)
+    def selectPastCourse(self, courseID):
+        newCourseHistory = CourseHistory(self.id, courseID)
         try:
             db.session.add(newCourseHistory)
             db.session.commit()
@@ -32,8 +32,8 @@ class Student(User):
             db.session.rollback()
             return False
 
-    def selectPlannedCourse(self, course):
-        newCoursePlan = CoursePlan(self.id, course.courseID)
+    def selectPlannedCourse(self, courseID):
+        newCoursePlan = CoursePlan(self.id, courseID)
         try:
             db.session.add(newCoursePlan)
             db.session.commit()

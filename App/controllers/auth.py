@@ -14,10 +14,6 @@ def jwt_authenticate(email, password):
     
 
 def login(email, password):
-    #user = User.query.filter_by(email=email).first()
-    #if user and user.check_password(password):
-    #    return user
-    #return None
     staff = Staff.query.filter_by(email=email).first()
     if staff and staff.check_password(password):
         return staff
@@ -32,7 +28,13 @@ def setup_flask_login(app):
     
     @login_manager.user_loader
     def load_user(user_id):
-        return User.query.get(user_id)
+        staff = Staff.query.get(user_id)
+        if staff:
+            return staff
+        student = Student.query.get(user_id)
+        if student:
+            return student
+        #return User.query.get(user_id)
     
     return login_manager
 
@@ -41,9 +43,12 @@ def setup_jwt(app):
 
     @jwt.user_identity_loader
     def user_identity_lookup(identity):
-        user = User.query.filter_by(email=identity).one_or_none()
-        if user:
-            return user.id
+        staff = Staff.query.filter_by(email=identity).one_or_none()
+        if staff:
+            return staff.id
+        student = Student.query.filter_by(email=identity).one_or_none()
+        if student:
+            return student.id
         return None
 
     @jwt.user_lookup_loader

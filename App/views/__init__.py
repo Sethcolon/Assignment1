@@ -5,11 +5,10 @@ from .user import user_views
 from .auth import auth_views
 from .course import course_views
 from .index import index_views
-from .studentcourse import studentcourse_views
 
 
 
 
 
-views = [auth_views, course_views, index_views, studentcourse_views, user_views] 
+views = [auth_views, course_views, index_views, user_views] 
 # blueprints must be added to this list

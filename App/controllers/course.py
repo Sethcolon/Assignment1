@@ -22,6 +22,7 @@ def get_all_courses_json():
         return [course.toJSON() for course in courses]
     return []
 
+
 def get_available_courses_json():
     courses = Course.query.filter_by(status='Available').all()
     if courses:

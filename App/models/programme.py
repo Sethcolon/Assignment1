@@ -10,9 +10,10 @@ class Programme(db.Model):
     advancedLevelCredits =  db.Column(db.Integer, nullable=False)
     foundationCredits =  db.Column(db.Integer, nullable=False)
     totalCredits =  db.Column(db.Integer, nullable=False)
+    creditsBreakdown = db.Column(db.String(120), nullable=True)
     courses = db.relationship('CourseProgramme', backref=db.backref('programme', lazy='joined'))
 
-    def __init__(self, programmeID, programmeName, faculty, levelOneCredits, advancedLevelCredits, foundationCredits, totalCredits):
+    def __init__(self, programmeID, programmeName, faculty, levelOneCredits, advancedLevelCredits, foundationCredits, totalCredits, creditsBreakdown):
         self.programmeID = programmeID
         self.programmeName = programmeName
         self.faculty = faculty
@@ -20,6 +21,7 @@ class Programme(db.Model):
         self.advancedLevelCredits = advancedLevelCredits
         self.foundationCredits = foundationCredits
         self.totalCredits = totalCredits
+        self.creditsBreakdown = creditsBreakdown
 
     def toJSON(self):
         return{
@@ -30,5 +32,6 @@ class Programme(db.Model):
             'advancedLevelCredits' : self.advancedLevelCredits,
             'foundationCredits' : self.foundationCredits,
             'totalCredits' : self.totalCredits,
-            'courses': [course.toJSON() for course in self.courses]
+            'creditsBreakdown' : self.creditsBreakdown,
+            #'courses': [course.toJSON() for course in self.courses]
         }

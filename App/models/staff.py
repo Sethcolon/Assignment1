@@ -1,9 +1,10 @@
 from .user import User
 from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
 from App.database import db
 
-class Staff(User):
 
+class Staff(User):
     __tablename__ = 'staff'
 
     def __init__(self, email, name, password):

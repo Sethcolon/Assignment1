@@ -14,6 +14,6 @@ class CourseProgramme(db.Model):
     def toJSON(self):
         return{
             'courseProgrammeID' : self.courseProgrammeID,
-            'course' : self.course.toJSON(),
-            'programme' : self.programme.toJSON()
+            'course' : self.courseID,
+            'programme' : self.programmeID
         }

@@ -21,6 +21,9 @@ class Course(db.Model):
         self.prerequisite = prerequisite
         self.status = "Unavailable"
 
+    def __repr__(self):
+        return f'<Course {self.courseID} {self.courseName} {self.type} {self.credits} {self.semester} {self.prerequisite} {self.status}>'
+
     def toJSON(self):
         return{
             'courseID' : self.courseID,
@@ -30,5 +33,4 @@ class Course(db.Model):
             'semester' : self.semester,
             'prerequisite' : self.prerequisite,
             'status' : self.status,
-            'programmes': [programme.toJSON() for programme in self.programmes]
         }

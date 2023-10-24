@@ -30,16 +30,16 @@ def identify_page():
 
 @auth_views.route('/login', methods=['POST'])
 def login_action():
-    data = request.form
+    data = request.json
     user = login(data['email'], data['password'])
     if user:
-        login_user(user)
-        return 'user logged in!'
+        if login(data['email'], data['password']):
+            return jsonify({"message":"user logged in!"})
     return 'bad email or password given', 401
 
 @auth_views.route('/logout', methods=['GET'])
 def logout_action():
-    data = request.form
+    data = request.json
     user = login(data['email'], data['password'])
     return 'logged out!'
 
@@ -61,10 +61,12 @@ def create_user_endpoint():
 @auth_views.route('/api/login', methods=['POST'])
 def user_login_api():
   data = request.json
-  token = jwt_authenticate(data['email'], data['password'])
-  if not token:
-    return jsonify(message='bad email or password given'), 401
-  return jsonify(access_token=token)
+  email = data['email']
+  password = data['password']
+  token = jwt_authenticate(email, password)
+  if token:
+    return jsonify(access_token=token)
+  return jsonify(error='bad email or password given'), 401
 
 @auth_views.route('/api/identify', methods=['GET'])
 @jwt_required()
