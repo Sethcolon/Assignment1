@@ -1,5 +1,6 @@
 from .user import User
 from .coursehistory import CourseHistory
+from .courseplan import CoursePlan
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from App.database import db

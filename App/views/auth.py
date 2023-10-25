@@ -25,7 +25,7 @@ def get_user_page():
 @auth_views.route('/identify', methods=['GET'])
 @login_required
 def identify_page():
-    return jsonify({'message': f"id : {current_user.id}"})
+    return jsonify({'message': f"id : {jwt_current_user.id}"})
 
 
 @auth_views.route('/login', methods=['POST'])

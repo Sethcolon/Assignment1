@@ -22,11 +22,10 @@ def initialize():
     db.create_all()
     create_staff('bob@uwimail.com', 'bob', 'bobpass')
     create_student('jane@uwimail.com', 'jane', 'janepass')
-    create_student('joe@uwimail.com', 'joe', 'joepass')
     
     create_programme('CS_Spec', 'BSc Computer Science (Special)', 'FST', 24, 60, 9, 93, 'Level One: 24 Core Credits | Advanced Level: 60 Credits (45 Core Credits + 15 Elective Credits) | Foundation: 9 Credits')
-    create_programme('CS_Major', 'Major in Computer Science', 'FST', 24, 60, 9, 93, 'Level One: 12 CompSci Core Credits | Advanced Level: 30 CompSci Credits (18 Core Credits + 12 Elective Credits) | Foundation: 9 Credits')
-    create_programme('CS_Minor', 'Minor in Computer Science', 'FST', 24, 60, 9, 93, 'Level One: 12 CompSci Core Credits | Advanced Level: 15 CompSci Credits (9 Core Credits + 6 Elective Credits) | Foundation: 9 Credits')
+    #create_programme('CS_Major', 'Major in Computer Science', 'FST', 24, 60, 9, 93, 'Level One: 12 CompSci Core Credits | Advanced Level: 30 CompSci Credits (18 Core Credits + 12 Elective Credits) | Foundation: 9 Credits')
+    #create_programme('CS_Minor', 'Minor in Computer Science', 'FST', 24, 60, 9, 93, 'Level One: 12 CompSci Core Credits | Advanced Level: 15 CompSci Credits (9 Core Credits + 6 Elective Credits) | Foundation: 9 Credits')
 
     create_course('COMP1600', 'Introduction to Computing Concepts', 'Level One', 3, 1)
     create_course('COMP1601', 'Computer Programming I', 'Level One', 3, 1)
@@ -53,7 +52,7 @@ def initialize():
     create_course('COMP3610', 'Big Data Analytics', 'Advanced Level', 3, 2, 'COMP3605')
     create_course('COMP3611', 'Modelling and Simulation', 'Advanced Level', 3, 2, 'MATH2250')
    
-    '''create_course('INFO1600', 'Introduction to Information Technology Concepts', 'Level One', 3, 1)
+    create_course('INFO1600', 'Introduction to Information Technology Concepts', 'Level One', 3, 1)
     create_course('INFO2605', 'Professional Ethics and Law', 'Advanced Level', 3, 1, 'COMP1600')
     create_course('INFO3600', 'Business Information Systems', 'Advanced Level', 3, 1, 'COMP2605')
     create_course('INFO3605', 'Fundamentals of LAN Technologies', 'Advanced Level', 3, 1, 'COMP2604')
@@ -65,7 +64,7 @@ def initialize():
     create_course('INFO3606', 'Cloud Computing', 'Advanced Level', 3, 2, 'COMP2605')
     create_course('INFO3607', 'Fundamentals of WAN Technologies', 'Advanced Level', 3, 2, 'COMP2604')
     create_course('INFO3608', 'E-Commerce', 'Advanced Level', 3, 2, 'COMP2606')
-    create_course('INFO3611', 'Database Administration', 'Advanced Level', 3, 2, 'COMP2605')'''
+    create_course('INFO3611', 'Database Administration', 'Advanced Level', 3, 2, 'COMP2605')
 
     create_course('MATH1115', 'Fundamental Mathematics for General Sciences I', 'Level One', 3, 1)
     create_course('MATH2250', 'Industrial Statistics', 'Advanced Level', 3, 1)

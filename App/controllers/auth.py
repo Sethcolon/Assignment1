@@ -13,10 +13,13 @@ def jwt_authenticate(email, password):
     return None
     
 
-def login(email, password):
+def login_staff(email, password):
     staff = Staff.query.filter_by(email=email).first()
     if staff and staff.check_password(password):
         return staff
+    return None
+
+def login(email, password):    
     student = Student.query.filter_by(email=email).first()
     if student and student.check_password(password):
         return student
